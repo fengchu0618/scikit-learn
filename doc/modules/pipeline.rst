@@ -14,7 +14,7 @@ Pipeline: chaining estimators
 :class:`Pipeline` can be used to chain multiple estimators
 into one. This is useful as there is often a fixed sequence
 of steps in processing the data, for example feature selection, normalization
-and classification. :class:`Pipeline` serves two purposes here:
+and classification. :class:`Pipeline` serves multiple purposes here:
 
 Convenience and encapsulation
     You only have to call ``fit`` and ``predict`` once on your
@@ -172,7 +172,7 @@ object::
      >>> from sklearn.datasets import load_digits
      >>> digits = load_digits()
      >>> pca1 = PCA()
-     >>> svm1 = SVC()
+     >>> svm1 = SVC(gamma='scale')
      >>> pipe = Pipeline([('reduce_dim', pca1), ('clf', svm1)])
      >>> pipe.fit(digits.data, digits.target)
      ... # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
@@ -193,7 +193,7 @@ object::
 
      >>> cachedir = mkdtemp()
      >>> pca2 = PCA()
-     >>> svm2 = SVC()
+     >>> svm2 = SVC(gamma='scale')
      >>> cached_pipe = Pipeline([('reduce_dim', pca2), ('clf', svm2)],
      ...                        memory=cachedir)
      >>> cached_pipe.fit(digits.data, digits.target)
